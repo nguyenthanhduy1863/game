@@ -1,6 +1,6 @@
 <template>
   <UForm :state="state" :validate="validate" @submit="submit">
-    <UFormGroup label="Tài khoản" name="username">
+    <UFormGroup label="Tài khoản" name="username" :hint="`${state.username ? state.username.length : 0}/15`">
       <UInput icon="i-bxs-user" v-model="state.username" />
     </UFormGroup>
 
@@ -12,7 +12,7 @@
       <UInput icon="i-bxs-phone" v-model="state.phone" />
     </UFormGroup>
 
-    <UFormGroup label="Mật khẩu" name="password">
+    <UFormGroup label="Mật khẩu" name="password" :hint="`${state.password ? state.password.length : 0}/15`">
       <UInput icon="i-bxs-lock" v-model="state.password" type="password" />
     </UFormGroup>
 
@@ -20,7 +20,9 @@
       <UInput icon="i-bx-barcode" v-model="state.code" placeholder="Nhập mã mời nếu có" />
     </UFormGroup>
 
-    <UButton block type="submit" :loading="loading">Đăng Ký</UButton>
+    <UiFlex justify="end">
+      <UButton type="submit" :loading="loading">Đăng Ký</UButton>
+    </UiFlex>
   </UForm>
 </template>
 

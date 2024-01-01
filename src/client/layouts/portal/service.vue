@@ -8,8 +8,11 @@
       <PortalServiceLayoutNav />
     </nav>
 
-    <main>
-      <slot></slot>
+    <main class="pt-[var(--service-layout-header-size)]">
+      <UContainer class="p-2">
+        <slot></slot>
+
+      </UContainer>
     </main>
 
     <aside class="shadow-md dark:shadow-xl">

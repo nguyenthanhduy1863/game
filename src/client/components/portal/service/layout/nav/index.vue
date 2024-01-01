@@ -20,7 +20,7 @@
 
     <!--Support-->
     <div class="w-full p-2">
-      <PortalServiceSupport />
+      <LazyPortalServiceSupport />
     </div>
   </UiFlex>
 </template>

@@ -4,12 +4,16 @@
       <UInput icon="i-bxs-user" v-model="state.username" />
     </UFormGroup>
 
-    <UFormGroup label="Mật khẩu" name="password">
+    <UFormGroup label="Điện thoại" name="phone">
+      <UInput icon="i-bxs-phone" v-model="state.phone" />
+    </UFormGroup>
+
+    <UFormGroup label="Mật khẩu mới" name="password" :hint="`${state.password ? state.password.length : 0}/15`">
       <UInput icon="i-bxs-lock" v-model="state.password" type="password" />
     </UFormGroup>
 
     <UiFlex justify="end">
-      <UButton type="submit" :loading="loading">Đăng Nhập</UButton>
+      <UButton type="submit" :loading="loading">Xác Nhận</UButton>
     </UiFlex>
   </UForm>
 </template>
@@ -17,21 +21,23 @@
 <script setup>
 const authStore = useAuthStore()
 
-const props = defineProps(['landing'])
 const emits = defineEmits(['done'])
 
 const loading = ref(false)
 
 const state = ref({
   username: undefined,
-  password: undefined,
-  landing: props.landing
+  phone: undefined,
+  password: undefined
 })
 
 const validate = (state) => {
   const errors = []
   if (!state.username) errors.push({ path: 'username', message: 'Vui lòng nhập đầy đủ' })
+  if (!state.phone) errors.push({ path: 'phone', message: 'Vui lòng nhập đầy đủ' })
   if (!state.password) errors.push({ path: 'password', message: 'Vui lòng nhập đầy đủ' })
+  else if (state.password.length < 6 || state.password.length > 15) errors.push({ path: 'password', message: 'Độ dài 6-15 ký tự' })
+  else if (!!state.password.match(/\s/g)) errors.push({ path: 'password', message: 'Phát hiện khoảng cách' })
   return errors
 }
 
@@ -40,7 +46,7 @@ const submit = async () => {
     if(!!loading.value) return
     loading.value = true
     
-    await useAPI('auth/sign/in', JSON.parse(JSON.stringify(state.value)))
+    await useAPI('auth/sign/forgot', JSON.parse(JSON.stringify(state.value)))
     await authStore.getAuth()
 
     loading.value = false

@@ -7,6 +7,7 @@ export const useAPI = async (path : string, post?: any, options: any = {}) => {
     ...options
   })
 
+  // Fetch Error
   if(error.value) {
     const statusCode = error.value.statusCode
     const message = error.value.message
@@ -14,15 +15,17 @@ export const useAPI = async (path : string, post?: any, options: any = {}) => {
       throw createError({ statusCode, message })
     }
     if(process.client){
-      showError({ statusCode, statusMessage:message })
-      return Promise.reject(false)
+      showError({ statusCode, statusMessage: message })
+      return Promise.reject(message)
     }
   }
 
+  // Fetch Done
   else {
     if(!data.value) return Promise.reject(false)
     const { code, message, result } = data.value as IRes
 
+    // Notify
     if(!!message && process.client){
       const toast = useToast()
       toast.add({
@@ -34,9 +37,11 @@ export const useAPI = async (path : string, post?: any, options: any = {}) => {
       })
     }
 
+    // Done
     if(code == 200) {
       return Promise.resolve(result || null)
     }
+    // Server Error
     else if(code == 500){
       if(process.server){
         throw createError({ statusCode:code, message:message })
@@ -46,7 +51,12 @@ export const useAPI = async (path : string, post?: any, options: any = {}) => {
         return Promise.reject(message)
       }
     }
+    // Auth False
     else if(code == 401) {
+      return Promise.reject(message)
+    }
+    // Auth Game False
+    else if(code == 403) {
       return Promise.reject(message)
     }
     else {
