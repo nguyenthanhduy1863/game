@@ -18,12 +18,12 @@ export default defineNuxtConfig({
     MONGO_URI: process.env.MONGO_URI,
     MONGO_DB: process.env.MONGO_DB,
     TOKEN_SECRET: process.env.TOKEN_SECRET,
-    COOKIE_CONFIG: {
-      path: '/',
-      maxAge: 7 * 24 * 60 * 60 * 1000
-    },
     public: {
-      CLIENT_URL: process.env.CLIENT_URL
+      CLIENT_URL: process.env.CLIENT_URL,
+      COOKIE_CONFIG: {
+        path: '/',
+        maxAge: 7 * 24 * 60 * 60 * 1000
+      }
     }
   },
 

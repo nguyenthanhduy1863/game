@@ -15,17 +15,13 @@
 </template>
 
 <script setup>
-const authStore = useAuthStore()
-
-const props = defineProps(['landing'])
 const emits = defineEmits(['done'])
 
+const authStore = useAuthStore()
 const loading = ref(false)
-
 const state = ref({
-  username: undefined,
-  password: undefined,
-  landing: props.landing
+  username: null,
+  password: null
 })
 
 const validate = (state) => {
@@ -44,7 +40,7 @@ const submit = async () => {
     await authStore.getAuth()
 
     loading.value = false
-    emit('done')
+    emits('done')
   }
   catch (e) {
     loading.value = false

@@ -1,12 +1,15 @@
 <template>
-  <div>
+  <UiFlex>
     <!-- Not Login -->
-    <UButton size="md" aria-label="Login" v-if="!authStore.isLogin" @click="authStore.setModal(true)">Đăng Nhập</UButton>
-
+    <UButton size="md" aria-label="Login" v-if="!isLogin" @click="setModal(true)">Đăng Nhập</UButton>
+    
     <!--Is Login -->
-  </div>
+    <AuthNotify v-if="!!isLogin" />
+
+    <AuthProfile v-if="!!isLogin" />
+  </UiFlex>
 </template>
 
 <script setup>
-const authStore = useAuthStore()
+const { isLogin, setModal } = useAuthStore()
 </script>

@@ -1,3 +1,4 @@
+import md5 from 'md5'
 import type { Mongoose } from 'mongoose'
 import type { IDBPortalUser, IDBPortalUserLogin } from '~~/types'
 
@@ -8,6 +9,7 @@ export const DBPortalUser = (mongoose : Mongoose) => {
       password: { type: String, required: true },
       type: { type: Number, default: 0 },
       block: { type: Boolean, default: false },
+      token: { type: String },
     },
   
     profile: {
@@ -20,7 +22,7 @@ export const DBPortalUser = (mongoose : Mongoose) => {
 
     referral: {
       code: { type: String },
-      person: { type: mongoose.Schema.Types.ObjectId, ref: 'PortalUser' },
+      person: { type: mongoose.Schema.Types.ObjectId, ref: 'PortalUser', index: true },
       count: { type: Number, default: 0, index: true },
     },
 
@@ -61,6 +63,19 @@ export const DBPortalUser = (mongoose : Mongoose) => {
   })
 
   const model = mongoose.model('PortalUser', schema, 'PortalUser')
+
+  const autoCreate = async () => {
+    const admin = await model.count({ 'auth.username': 'admin' })
+    if(admin == 0) await model.create({
+      auth: {
+        username: 'admin',
+        password: md5('123123'),
+        type: 2
+      }
+    })
+  }
+  autoCreate()
+
   return model 
 }
 

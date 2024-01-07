@@ -1,6 +1,8 @@
-import type { H3Event } from 'h3'
+import type { IFormatDate } from '~~/types'
+import dayjs from 'dayjs'
 
-export default (event: H3Event, data : string, space : string = '') : string => {
+// Title Seo
+const formatTitle = (data : string, space : string = '') : string => {
   let str = String(data)
   str = str.toLowerCase();
   str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a")
@@ -25,4 +27,27 @@ export default (event: H3Event, data : string, space : string = '') : string => 
   str = str.trim()
 
   return str
+}
+
+// Date
+const formatDate = (date?: Date) : IFormatDate => {
+  const dateFormat = !!date ? dayjs(date) : null
+  
+  return {
+    day: !!dateFormat ? dateFormat.get('date') : 0,
+    month: !!dateFormat ? dateFormat.get('month') + 1 : 0,
+    year: !!dateFormat ? dateFormat.get('year') : 0,
+    hour: !!dateFormat ? dateFormat.get('hour') : 0,
+    minute: !!dateFormat ? dateFormat.get('minute') : 0,
+    second: !!dateFormat ? dateFormat.get('second') : 0,
+    timestamp: !!dateFormat ? dateFormat.unix() : 0,
+    source: date
+  }
+}
+
+export default () => {
+  return {
+    title: formatTitle,
+    date: formatDate,
+  }
 }

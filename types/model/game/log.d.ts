@@ -7,6 +7,7 @@ export interface IDBGameLogUser {
   
   game: Types.ObjectId
   user: Types.ObjectId
+  type: string
   action: string
 }
 
@@ -17,5 +18,6 @@ export interface IDBGameLogAdmin {
   
   game: Types.ObjectId
   user: Types.ObjectId
+  type: string
   action: string
 }

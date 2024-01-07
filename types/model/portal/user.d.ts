@@ -10,6 +10,7 @@ export interface IDBPortalUser {
     password: string
     type: number
     block: boolean
+    token: string
   }
 
   profile: {
@@ -51,6 +52,8 @@ export interface IDBPortalUser {
       count: number
     }
   }
+
+  save: any
 }
 
 export interface IDBPortalUserLogin {
@@ -59,4 +62,11 @@ export interface IDBPortalUserLogin {
   updatedAt: Date
 
   user: Types.ObjectId
+}
+
+export interface IDBPortalUserStore {
+  _id: Types.ObjectId
+  auth: IDBPortalUser['auth']
+  profile: IDBPortalUser['profile']
+  currency: IDBPortalUser['currency']
 }

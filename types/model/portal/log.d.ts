@@ -6,6 +6,7 @@ export interface IDBPortalLogUser {
   updatedAt: Date
   
   user: Types.ObjectId
+  type: string
   action: string
 }
 
@@ -15,5 +16,6 @@ export interface IDBPortalLogAdmin {
   updatedAt: Date
   
   user: Types.ObjectId
+  type: string
   action: string
 }

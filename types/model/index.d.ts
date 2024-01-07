@@ -1,7 +1,7 @@
 import type { Model } from 'mongoose'
 
 export { IDBPortalConfig } from './portal/config'
-export { IDBPortalUser, IDBPortalUserLogin } from './portal/user'
+export { IDBPortalUser, IDBPortalUserLogin, IDBPortalUserStore } from './portal/user'
 export { IDBPortalNewsCategory, IDBPortalNews } from './portal/news'
 export { IDBPortalGamePlatform, IDBPortalGameCategory, IDBPortalGame } from './portal/game'
 export { IDBPortalWithdraw } from './portal/withdraw'

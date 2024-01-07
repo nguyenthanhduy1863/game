@@ -1,7 +1,7 @@
 import type { IRes } from '~~/types'
 
 export const useAPI = async (path : string, post?: any, options: any = {}) => {
-  const { data, error } = await useFetch(`/${path}`, {
+  const { data, error } = await useFetch(`/api/${path}`, {
     method: !!post ? 'POST' : 'GET',
     body: !!post ? post : null,
     ...options

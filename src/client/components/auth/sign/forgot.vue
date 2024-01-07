@@ -19,12 +19,10 @@
 </template>
 
 <script setup>
-const authStore = useAuthStore()
-
 const emits = defineEmits(['done'])
 
+const authStore = useAuthStore()
 const loading = ref(false)
-
 const state = ref({
   username: undefined,
   phone: undefined,
@@ -47,7 +45,6 @@ const submit = async () => {
     loading.value = true
     
     await useAPI('auth/sign/forgot', JSON.parse(JSON.stringify(state.value)))
-    await authStore.getAuth()
 
     loading.value = false
     emit('done')

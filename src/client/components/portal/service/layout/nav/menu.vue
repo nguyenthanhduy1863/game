@@ -35,21 +35,6 @@ const list = [{
     click: () => navigateTo('/')
   }]
 },{
-  name: 'Phân loại',
-  child: [{
-    label: 'Game Mới',
-    icon: 'i-dashicons-games',
-    click: () => navigateTo('/')
-  },{
-    label: 'Game Tool',
-    icon: 'i-mdi-microsoft-xbox-gamepad-battery-low',
-    click: () => navigateTo('/')
-  },{
-    label: 'Game Free',
-    icon: 'i-fluent-games-32-filled',
-    click: () => navigateTo('/')
-  }]
-},{
   name: 'Nền Tảng',
   child: [{
     label: 'Game H5',

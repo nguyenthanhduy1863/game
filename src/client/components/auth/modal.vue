@@ -6,13 +6,13 @@
       
       <UCard>
         <!-- Tab Sign In -->
-        <AuthSignIn v-if="tab == 0" />
+        <AuthSignIn v-if="tab == 0" @done="open = false" />
 
         <!-- Tab Sign Up -->
-        <AuthSignUp v-if="tab == 1" />
+        <AuthSignUp v-if="tab == 1" @done="open = false" />
 
         <!-- Tab Sign Forgot -->
-        <AuthSignForgot v-if="tab == 2" />
+        <AuthSignForgot v-if="tab == 2" @done="tab = 0" />
       </UCard>
     </div>
   </UModal>
